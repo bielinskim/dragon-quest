@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dragonquest.characters.CharactersViewModel
 import com.dragonquest.common.GamePagerAdapter
 import com.dragonquest.common.GameTabLayout
+import com.dragonquest.quests.QuestsViewModel
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +20,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeData() {
-        val vm: CharactersViewModel by viewModels()
-        vm.initializeData()
+        val cvm: CharactersViewModel by viewModels()
+        val qvm: QuestsViewModel by viewModels()
+        cvm.initializeData()
+        qvm.initializeData()
     }
 
     private fun setView() {
