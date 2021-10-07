@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DragonQuest</string>
+    <string name="image_of_character">Image of character</string>
+    <string name="hello_blank_fragment">Test</string>
 </resources>
