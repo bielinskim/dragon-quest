@@ -7,21 +7,26 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/gamePager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        app:defaultNavHost="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigation" />
+
 
     <View
         android:id="@+id/gameTabLayoutSeparator"
         android:layout_width="match_parent"
         android:layout_height="0.25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/gameTabLayout"
         android:background="@color/primary"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/gameTabLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/gameTabLayout"
@@ -31,6 +36,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabIndicatorGravity="top"
-        app:tabIndicatorHeight="0dp"/>
+        app:tabIndicatorHeight="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

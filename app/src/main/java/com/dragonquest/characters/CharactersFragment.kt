@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
+import com.google.android.material.tabs.TabLayout
 
 class CharactersFragment : Fragment() {
 
@@ -33,4 +35,5 @@ class CharactersFragment : Fragment() {
 
         return view;
     }
+
 }

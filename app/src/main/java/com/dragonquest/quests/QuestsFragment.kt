@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
 import com.dragonquest.characters.CharactersAdapter
 import com.dragonquest.characters.CharactersViewModel
+import com.google.android.material.tabs.TabLayout
 
 class QuestsFragment : Fragment() {
 
@@ -24,7 +26,7 @@ class QuestsFragment : Fragment() {
 
         val questsRecyclerView: RecyclerView = view.findViewById(R.id.questsRecyclerView)
         questsRecyclerView.layoutManager =  LinearLayoutManager(activity);
-        val questsAdapter = QuestsAdapter()
+        val questsAdapter = QuestsAdapter(activity)
         questsRecyclerView.adapter = questsAdapter
 
         vm.quests.observe(viewLifecycleOwner, { data ->
