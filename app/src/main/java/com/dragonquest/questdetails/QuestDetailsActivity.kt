@@ -10,6 +10,7 @@ import com.dragonquest.R
 import com.dragonquest.characters.CharactersAdapter
 import com.dragonquest.characters.CharactersViewModel
 import com.google.android.material.tabs.TabLayout
+import com.dragonquest.models.Character
 
 class QuestDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,15 +18,15 @@ class QuestDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quest_details)
 
         val vm: CharactersViewModel by viewModels()
-//        var characters : List<Character> = vm.characters.value
-//        if(characters == null) {
-//            characters  = listOf()
-//        }
+        var characters : List<Character>? = vm.characters.value
+        if(characters == null) {
+            characters  = listOf()
+        }
 
 
         val questDetailsRecyclerView: RecyclerView = findViewById(R.id.questDetailsRecyclerView)
         questDetailsRecyclerView.layoutManager =  LinearLayoutManager(this);
-        val questDetailsAdapter = QuestDetailsAdapter(vm.characters.value)
+        val questDetailsAdapter = QuestDetailsAdapter(characters)
         questDetailsRecyclerView.adapter = questDetailsAdapter
 
 
