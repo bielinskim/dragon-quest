@@ -17,14 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeData()
-        initializeTabNavigation()
-    }
-
-    private fun initializeTabNavigation() {
-        val tabLayout : TabLayout = findViewById(R.id.gameTabLayout)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navigationHost) as NavHostFragment
-        val navController: NavController = navHostFragment.navController
-        TabNavigation.setTabNavigation(tabLayout, navController)
     }
 
     private fun initializeData() {

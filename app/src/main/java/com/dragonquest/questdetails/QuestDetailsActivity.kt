@@ -38,8 +38,6 @@ class QuestDetailsActivity : AppCompatActivity() {
         val questId = intent.getIntExtra("QUEST_ID", 0)
         val quest = questVM.getUserById(questId)
 
-        Log.d("D2", questVM.quests.value?.size.toString())
-
         val (id, name, level, experience, time, description) = quest
 
         questTimeView.text = time.toString()

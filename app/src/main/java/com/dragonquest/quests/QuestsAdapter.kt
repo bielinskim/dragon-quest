@@ -42,7 +42,6 @@ class QuestsAdapter(private val activity: FragmentActivity?, private var dataSet
 
         holder.thisView.setOnClickListener { it: View ->
             val intent = Intent(activity, QuestDetailsActivity::class.java).apply {
-                Log.d("D1", id.toString())
                 putExtra("QUEST_ID", id)
             }
 
