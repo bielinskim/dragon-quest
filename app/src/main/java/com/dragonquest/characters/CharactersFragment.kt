@@ -28,10 +28,10 @@ class CharactersFragment : Fragment() {
         val charactersAdapter = CharactersAdapter()
         charactersRecyclerView.adapter = charactersAdapter
 
-        vm.characters.observe(viewLifecycleOwner, { data ->
+        vm.characters.observe(viewLifecycleOwner) { data ->
             charactersAdapter.setData(data)
             charactersAdapter.notifyDataSetChanged()
-        })
+        }
 
         return view;
     }

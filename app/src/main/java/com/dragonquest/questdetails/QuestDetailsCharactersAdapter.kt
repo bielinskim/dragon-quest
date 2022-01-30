@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
 import com.dragonquest.models.Character
 
-class QuestDetailsAdapter(private var dataSet: List<Character> = listOf()) :
-RecyclerView.Adapter<QuestDetailsAdapter.ViewHolder>() {
+class QuestDetailsCharactersAdapter(private var dataSet: List<Character> = listOf()) :
+RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val characterNameView: TextView = view.findViewById(R.id.characterName)

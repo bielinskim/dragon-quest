@@ -27,11 +27,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/arrowBack" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/questDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/questDetailsCharactersRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/questDetailsSeparator"
+        >
+
+        <TextView
+            android:id="@+id/questDetailsTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/questDetailsLayout"
+            app:layout_constraintStart_toStartOf="@+id/questDetailsLayout"/>
+        <TextView
+            android:id="@+id/questDetailsDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/questDetailsTime"
+            app:layout_constraintStart_toStartOf="@+id/questDetailsLayout"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questDetailsRecyclerView"
+        android:id="@+id/questDetailsCharactersRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questDetailsSeparator" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
