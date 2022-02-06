@@ -6,5 +6,6 @@ data class Quest(
     val level: Int = 0,
     val experience: Int = 0,
     val time: Int = 0,
+    val slots: Int = 0,
     val description: String = "",
 )

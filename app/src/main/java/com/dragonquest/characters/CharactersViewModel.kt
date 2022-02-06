@@ -17,10 +17,10 @@ class CharactersViewModel : ViewModel() {
 //        }
 
        characters.postValue(listOf(
-           Character(1, "Abu", 0, charactersImages["Unit1"]),
-           Character(2, "Praveen", 1200, charactersImages["Unit2"]),
-           Character(3, "Sathya", 13999, charactersImages["Unit3"]),
-           Character(4, "Ailen", 38000, charactersImages["Unit4"])
+           Character(1, "Abu", 0, charactersImages[1]),
+           Character(2, "Praveen", 1200, charactersImages[2]),
+           Character(3, "Sathya", 13999, charactersImages[3]),
+           Character(4, "Ailen", 38000, charactersImages[4])
        ))
     }
 }

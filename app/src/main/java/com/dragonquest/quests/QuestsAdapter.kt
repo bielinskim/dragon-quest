@@ -1,20 +1,16 @@
 package com.dragonquest.quests
 
-import android.content.Intent
-import android.util.Log
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.dragonquest.MainActivity
 import com.dragonquest.R
 import com.dragonquest.models.Quest
-import com.dragonquest.questdetails.QuestDetailsActivity
-import com.dragonquest.utils.getLevel
 
-class QuestsAdapter(private val activity: FragmentActivity?, private var dataSet: List<Quest> = listOf()) :
+class QuestsAdapter(val navController : NavController, private var dataSet: List<Quest> = listOf()) :
     RecyclerView.Adapter<QuestsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -41,11 +37,9 @@ class QuestsAdapter(private val activity: FragmentActivity?, private var dataSet
         holder.questExperienceView.text = "$experience xp"
 
         holder.thisView.setOnClickListener { it: View ->
-            val intent = Intent(activity, QuestDetailsActivity::class.java).apply {
-                putExtra("QUEST_ID", id)
-            }
-
-            activity?.startActivity(intent)
+            val bundle = Bundle()
+            bundle.putInt("questId", id)
+            navController.navigate(R.id.action_questsFragment_to_questDetailsFragment, bundle)
         }
     }
 

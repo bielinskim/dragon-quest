@@ -29,7 +29,7 @@ class QuestsFragment : Fragment() {
 
         val questsRecyclerView: RecyclerView = view.findViewById(R.id.questsRecyclerView)
         questsRecyclerView.layoutManager =  LinearLayoutManager(activity);
-        val questsAdapter = QuestsAdapter(activity)
+        val questsAdapter = QuestsAdapter(navController)
         questsRecyclerView.adapter = questsAdapter
 
         vm.quests.observe(viewLifecycleOwner) { data ->
