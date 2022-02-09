@@ -2,14 +2,9 @@ package com.dragonquest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.dragonquest.characters.CharactersViewModel
-import com.dragonquest.common.TabNavigation
-import com.dragonquest.quests.QuestsViewModel
-import com.google.android.material.tabs.TabLayout
+import com.dragonquest.viewmodels.CharactersViewModel
+import com.dragonquest.viewmodels.QuestsViewModel
 
 class MainActivity : AppCompatActivity() {
 

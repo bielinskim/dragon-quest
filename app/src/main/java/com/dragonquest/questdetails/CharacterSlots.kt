@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.dragonquest.R
+import com.dragonquest.data.characterImages
 import com.dragonquest.models.Quest
 import com.dragonquest.models.Character
 
@@ -12,6 +13,7 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
 
     private val slotViewIds = arrayOf(R.id.selectedCharacter1, R.id.selectedCharacter2, R.id.selectedCharacter3)
     private val characterSlots = arrayListOf<CharacterSlot>()
+    private val charactersImages = characterImages()
     var slots = 0
 
     init {
@@ -42,8 +44,10 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
     fun addCharacterToSlot(characterSlot : CharacterSlot, character : Character) {
         characterSlot.character = character
         val characterImage = characterSlot.slotView.findViewWithTag<ImageView>("characterImage")
-        if(character.image != null) {
-            characterImage.setImageResource(character.image)
+        val image = charactersImages[character.imageId]
+
+        if(image != null) {
+            characterImage.setImageResource(image)
             addListenerToFullSlot(characterSlot)
         }
     }

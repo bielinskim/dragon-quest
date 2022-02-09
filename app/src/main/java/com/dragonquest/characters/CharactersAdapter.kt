@@ -9,9 +9,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
+import com.dragonquest.data.characterImages
 import com.dragonquest.models.Character
 import com.dragonquest.utils.getLevel
 import com.dragonquest.utils.GetLevelProgress
+
 
 class CharactersAdapter(private var dataSet: List<Character> = listOf()) :
     RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
@@ -21,6 +23,7 @@ class CharactersAdapter(private var dataSet: List<Character> = listOf()) :
         val characterExperienceView: ProgressBar = view.findViewById(R.id.characterExperience)
         val characterLevelView: TextView = view.findViewById(R.id.characterLevel)
         val characterImageView: ImageView = view.findViewById(R.id.characterImage)
+        val charactersImages = characterImages()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +35,8 @@ class CharactersAdapter(private var dataSet: List<Character> = listOf()) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val name = dataSet[position].name
         val experience = dataSet[position].experience
-        val image = dataSet[position].image
+        val imageId = dataSet[position].imageId
+        val image = holder.charactersImages[imageId]
         val (_, level, minExp, maxExp) = getLevel(dataSet[position].experience)
         val progress = GetLevelProgress(experience, minExp, maxExp)
 

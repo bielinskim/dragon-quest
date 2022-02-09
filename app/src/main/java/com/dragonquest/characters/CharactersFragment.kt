@@ -1,20 +1,17 @@
 package com.dragonquest.characters
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
-import com.dragonquest.common.TabNavigation
-import com.google.android.material.tabs.TabLayout
+import com.dragonquest.viewmodels.CharactersViewModel
 
 class CharactersFragment : Fragment() {
 

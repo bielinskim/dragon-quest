@@ -1,9 +1,11 @@
 package com.dragonquest.questdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -11,16 +13,25 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.Volley
 import com.dragonquest.R
-import com.dragonquest.characters.CharactersViewModel
+import com.dragonquest.viewmodels.CharactersViewModel
 import com.dragonquest.models.Character
+import com.dragonquest.models.Level
 import com.dragonquest.models.Quest
-import com.dragonquest.quests.QuestsViewModel
+import com.dragonquest.viewmodels.QuestsViewModel
+import com.dragonquest.utils.RetrofitService
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import retrofit2.Call
+import retrofit2.Callback
+
 
 class QuestDetailsFragment : Fragment() {
 
     private val questVM: QuestsViewModel by activityViewModels()
     private val chVM: CharactersViewModel by activityViewModels()
+    private lateinit var gson : Gson
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +39,9 @@ class QuestDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_quest_details, container, false)
         val navController = Navigation.findNavController(requireActivity(), R.id.navigationHost)
+
+        val gsonBuilder = GsonBuilder();
+        gson = gsonBuilder.create();
 
         var questId = arguments?.getInt("questId")
         if(questId == null) {
@@ -65,6 +79,12 @@ class QuestDetailsFragment : Fragment() {
 
         questNameView.text = name
         questDescView.text = description
+
+        val startQuestButton = view.findViewById<Button>(R.id.startQuestButton)
+
+        startQuestButton.setOnClickListener {
+
+        }
 
     }
 

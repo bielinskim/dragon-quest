@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
+import com.dragonquest.data.characterImages
 import com.dragonquest.models.Character
 import com.dragonquest.utils.GetLevelProgress
 import com.dragonquest.utils.getLevel
@@ -23,6 +24,7 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
         val characterNameView: TextView = view.findViewById(R.id.characterName)
         val characterImageView: ImageView = view.findViewById(R.id.characterImage)
         val characterExperienceView: ProgressBar = view.findViewById(R.id.characterExperience)
+        val charactersImages = characterImages()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,13 +36,13 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (_, level, minExp, maxExp) = getLevel(dataSet[position].experience)
         val progress = GetLevelProgress(dataSet[position].experience, minExp, maxExp)
-
+        val imageId = dataSet[position].imageId
+        val image = holder.charactersImages[imageId]
 
         holder.characterNameView.text = dataSet[position].name
         holder.characterExperienceView.progress = progress
-        val characterImage = dataSet[position].image
-        if(characterImage != null) {
-            holder.characterImageView.setImageResource(characterImage)
+        if(image != null) {
+            holder.characterImageView.setImageResource(image)
         }
 
         holder.thisView.setOnClickListener { it: View ->
