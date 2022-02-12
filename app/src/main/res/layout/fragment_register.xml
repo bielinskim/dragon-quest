@@ -5,10 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginFragment">
+    tools:context=".register.RegisterFragment">
+
+    <TextView
+        android:id="@+id/registerMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/registerContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loginContainer1"
+        android:id="@+id/registerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,10 +28,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/loginMessage"
+            android:id="@+id/registerMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_title"
+            android:text="@string/register_title"
             android:textColor="@color/primary"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,11 +39,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/loginLoginInput"
+            android:id="@+id/registerLoginInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:autofillHints="login"
             android:ems="10"
             android:hint="@string/login_hint"
             android:inputType="textPersonName"
@@ -41,48 +51,47 @@
             android:backgroundTint="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/registerMsg" />
 
         <EditText
-            android:id="@+id/loginPasswordInput"
+            android:id="@+id/registerPasswordInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:autofillHints="password"
-            android:ems="10"
             android:hint="@string/password_hint"
+            android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:textColor="@color/primary"
             android:backgroundTint="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginLoginInput" />
+            app:layout_constraintTop_toBottomOf="@+id/registerLoginInput" />
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/primary_variant"
-            android:text="@string/login_button"
+            android:text="@string/register_button"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginPasswordInput" />
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordInput" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/loginTabLayoutSeparator"
+        android:id="@+id/registerTabLayoutSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/primary"
-        app:layout_constraintBottom_toTopOf="@+id/loginContainer2"/>
+        app:layout_constraintBottom_toTopOf="@+id/registerContainer2"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loginContainer2"
+        android:id="@+id/registerContainer2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="40dp"
@@ -97,7 +106,6 @@
             android:layout_height="wrap_content"
             android:text="@string/login_tab"
             android:textSize="20sp"
-            android:textColor="@color/primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,9 +115,9 @@
             android:layout_height="wrap_content"
             android:text="@string/register_tab"
             android:textSize="20sp"
+            android:textColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

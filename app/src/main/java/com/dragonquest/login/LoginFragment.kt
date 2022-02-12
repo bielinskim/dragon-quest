@@ -1,60 +1,134 @@
 package com.dragonquest.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
+import com.dragonquest.models.User
+import com.dragonquest.utils.RetrofitService
+import com.dragonquest.viewmodels.CharactersViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var loginMessage: TextView
+    lateinit var loginLoginInput: TextView
+    lateinit var loginPasswordInput: TextView
+    lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        navController = Navigation.findNavController(requireActivity(), R.id.navigationHost)
+
+        val registerTabTextView: TextView = view.findViewById(R.id.registerTabTextView)
+        val loginButton: Button = view.findViewById(R.id.loginButton)
+
+        loginMessage = view.findViewById(R.id.loginMessage)
+        loginLoginInput = view.findViewById(R.id.loginLoginInput)
+        loginPasswordInput = view.findViewById(R.id.loginPasswordInput)
+
+        registerTabTextView.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        loginButton.setOnClickListener {
+            val login = loginLoginInput.text.toString()
+            val password = loginPasswordInput.text.toString()
+
+            val isValid = validate(login, password)
+
+            if (isValid) {
+                login(login, password)
+            }
+        }
+
+        return view;
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun validate(login: String, password: String): Boolean {
+
+        if (login == "") {
+            val message = "Pole login nie może byc puste"
+            setMessage(message, "ERROR")
+
+            return false;
+        }
+
+        if (password == "") {
+            val message = "Pole hasło nie może byc puste"
+            setMessage(message, "ERROR")
+
+            return false;
+        }
+
+        return true;
+
     }
+
+    private fun login(login: String, password: String) {
+        val api = RetrofitService
+
+        val user = User(null, login, password)
+
+        api.loginUser(user, {
+            if (it?.userId != null) {
+                val message = "Zalogowano"
+                setMessage(message, "SUCCESS")
+                clearInputs()
+                onLoginSuccess()
+            } else {
+                val message = "Błąd podczas logowania"
+                setMessage(message, "ERROR")
+            }
+        },
+            {
+                if (it is String) {
+                    setMessage(it, "ERROR")
+                }
+            })
+    }
+
+    private fun setMessage(message: String, type: String) {
+        if (type == "ERROR") {
+            val errorColor = context?.getColor(R.color.error)
+
+            if (errorColor != null) {
+                loginMessage.setTextColor(errorColor)
+            }
+
+        }
+
+        if (type == "SUCCESS") {
+            val successColor = context?.getColor(R.color.success)
+
+            if (successColor != null) {
+                loginMessage.setTextColor(successColor)
+            }
+        }
+
+        loginMessage.text = message
+    }
+
+    private fun clearInputs() {
+        loginLoginInput.text = ""
+        loginPasswordInput.text = ""
+    }
+
+    private fun onLoginSuccess() {
+        navController.navigate(R.id.action_loginFragment_to_charactersFragment)
+    }
+
 }

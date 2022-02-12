@@ -3,7 +3,6 @@ package com.dragonquest.viewmodels
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dragonquest.models.Level
 import com.dragonquest.models.Quest
 import com.dragonquest.utils.RetrofitService
 import retrofit2.Call
@@ -35,7 +34,7 @@ class QuestsViewModel : ViewModel() {
     }
 
     fun getUserById(id :Int) : Quest {
-        val quest = quests.value?.find { it.id == id }
+        val quest = quests.value?.find { it.questId == id }
 
         if(quest != null) {
             return quest

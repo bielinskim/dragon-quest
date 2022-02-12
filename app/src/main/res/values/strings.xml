@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">DragonQuest</string>
     <string name="image_of_character">Image of character</string>
-    <string name="hello_blank_fragment">Test</string>
+    <string name="login_title">Logowanie</string>
+    <string name="login_button">Zaloguj się</string>
+    <string name="login_hint">Login</string>
+    <string name="password_hint">Hasło</string>
+    <string name="login_tab">Logowanie</string>
+    <string name="register_tab">Rejestracja</string>
+    <string name="register_title">Rejestracja</string>
+    <string name="register_button">Zarejestruj się</string>
 </resources>

@@ -35,9 +35,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:color="@color/primary"
             android:padding="12dp"
             android:src="@drawable/list"
-            app:tint="@color/primary_variant" />
+            app:tint="@color/primary" />
 
         <ImageView
             android:id="@+id/questsButton"

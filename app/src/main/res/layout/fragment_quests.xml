@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:padding="12dp"
             android:src="@drawable/swords"
-            app:tint="@color/primary_variant" />
+            app:tint="@color/primary" />
     </LinearLayout>
 
 </LinearLayout>

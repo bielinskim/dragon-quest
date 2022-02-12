@@ -30,7 +30,7 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
     }
 
     fun selectCharacter(character : Character) {
-        val isAlreadySelected = characterSlots.any { it.character?.id == character.id }
+        val isAlreadySelected = characterSlots.any { it.character?.characterId == character.characterId }
 
         if (!isAlreadySelected) {
             var emptyCharacterSlot = characterSlots.firstOrNull { it.character == null }

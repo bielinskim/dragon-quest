@@ -10,4 +10,7 @@
     <color name="background">#2F3136</color>
     <color name="primary">#8e9297</color>
     <color name="primary_variant">#202225</color>
+    <color name="error">#dc3545</color>
+    <color name="success">#28a745</color>
+    <color name="info">#17a2b8</color>
 </resources>
