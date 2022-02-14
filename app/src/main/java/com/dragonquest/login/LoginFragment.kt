@@ -1,25 +1,26 @@
 package com.dragonquest.login
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
 import com.dragonquest.models.User
 import com.dragonquest.utils.RetrofitService
+import com.dragonquest.utils.UserDataStore
 import com.dragonquest.viewmodels.CharactersViewModel
+import com.dragonquest.viewmodels.QuestsViewModel
 
 class LoginFragment : Fragment() {
+
+    private val chVM: CharactersViewModel by activityViewModels()
+    private val questVM: QuestsViewModel by activityViewModels()
 
     lateinit var loginMessage: TextView
     lateinit var loginLoginInput: TextView
@@ -81,17 +82,16 @@ class LoginFragment : Fragment() {
     private fun login(login: String, password: String) {
         val api = RetrofitService
 
-        val user = User(null, login, password)
+        var user = User(null, login, password, null)
 
         api.loginUser(user, {
-            if (it?.userId != null) {
-                val message = "Zalogowano"
-                setMessage(message, "SUCCESS")
+            val userId = it?.userId
+            if (userId != null) {
+                setMessage("Zalogowano", "SUCCESS")
                 clearInputs()
-                onLoginSuccess()
+                onLoginSuccess(it)
             } else {
-                val message = "Błąd podczas logowania"
-                setMessage(message, "ERROR")
+                setMessage("Błąd podczas logowania", "ERROR")
             }
         },
             {
@@ -127,8 +127,19 @@ class LoginFragment : Fragment() {
         loginPasswordInput.text = ""
     }
 
-    private fun onLoginSuccess() {
-        navController.navigate(R.id.action_loginFragment_to_charactersFragment)
+    private fun onLoginSuccess(user : User) {
+        val userId = user.userId
+        val token = user.token
+
+        if(token != null) {
+            UserDataStore.token = token
+        }
+
+        if(userId != null) {
+            chVM.initializeData()
+            questVM.initializeData()
+            navController.navigate(R.id.action_loginFragment_to_charactersFragment)
+        }
     }
 
 }

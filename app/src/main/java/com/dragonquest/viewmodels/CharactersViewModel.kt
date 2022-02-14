@@ -3,33 +3,32 @@ package com.dragonquest.viewmodels
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dragonquest.data.characterImages
-import com.dragonquest.models.Character
-import com.dragonquest.models.Quest
+import com.dragonquest.models.UserCharacter
 import com.dragonquest.utils.RetrofitService
+import com.dragonquest.utils.UserDataStore
 import retrofit2.Call
 import retrofit2.Callback
 
 class CharactersViewModel : ViewModel() {
 
-    var characters: MutableLiveData<List<Character>> = MutableLiveData()
+    var characters: MutableLiveData<List<UserCharacter>> = MutableLiveData()
 
     fun initializeData() {
-        val getCharacters = RetrofitService.api.getCharacters()
+        val getUsersCharacters = RetrofitService.api.getUserCharacters(UserDataStore.token)
 
-        getCharacters.enqueue( object : Callback<List<Character>> {
+        getUsersCharacters.enqueue( object : Callback<List<UserCharacter>> {
             override fun onResponse(
-                call: Call<List<Character>>,
-                response: retrofit2.Response<List<Character>>
+                call: Call<List<UserCharacter>>,
+                response: retrofit2.Response<List<UserCharacter>>
             ) {
-                val charactersResponse = response.body()
-                if(charactersResponse != null) {
-                    characters.postValue(charactersResponse)
+                val userCharactersResponse = response.body()
+                if(userCharactersResponse != null) {
+                    characters.postValue(userCharactersResponse)
                 }
 
             }
 
-            override fun onFailure(call: Call<List<Character>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<UserCharacter>>?, t: Throwable?) {
                 Log.e("RequestError", "getCharacters")
             }
         })

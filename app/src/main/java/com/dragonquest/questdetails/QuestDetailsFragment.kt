@@ -1,7 +1,6 @@
 package com.dragonquest.questdetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,25 +12,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.Volley
 import com.dragonquest.R
 import com.dragonquest.viewmodels.CharactersViewModel
-import com.dragonquest.models.Character
-import com.dragonquest.models.Level
 import com.dragonquest.models.Quest
+import com.dragonquest.models.UserCharacter
+import com.dragonquest.models.UserQuest
 import com.dragonquest.viewmodels.QuestsViewModel
-import com.dragonquest.utils.RetrofitService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import retrofit2.Call
-import retrofit2.Callback
 
 
 class QuestDetailsFragment : Fragment() {
 
     private val questVM: QuestsViewModel by activityViewModels()
     private val chVM: CharactersViewModel by activityViewModels()
-    private lateinit var gson : Gson
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,18 +34,15 @@ class QuestDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_quest_details, container, false)
         val navController = Navigation.findNavController(requireActivity(), R.id.navigationHost)
 
-        val gsonBuilder = GsonBuilder();
-        gson = gsonBuilder.create();
-
         var questId = arguments?.getInt("questId")
         if(questId == null) {
             questId = 0
         }
-        val quest = questVM.getUserById(questId)
+        val userQuest = questVM.getQuestById(questId)
 
-        createQuestDetails(view, quest)
-        val characterSlots = CharacterSlots(view, quest)
-        createCharactersList(view, quest, characterSlots)
+        createQuestDetails(view, userQuest)
+        val characterSlots = CharacterSlots(view, userQuest)
+        createCharactersList(view, characterSlots)
 
         val arrowBack : ImageView = view.findViewById(R.id.arrowBack)
         arrowBack.setOnClickListener {
@@ -62,7 +53,7 @@ class QuestDetailsFragment : Fragment() {
 
     }
 
-    fun createQuestDetails(view :View, quest : Quest) {
+    fun createQuestDetails(view :View, userQuest : UserQuest) {
         val questLevelView = view.findViewById<TextView>(R.id.questDetailsLevel)
         val questTimeView = view.findViewById<TextView>(R.id.questDetailsTime)
         val questExperienceView = view.findViewById<TextView>(R.id.questDetailsExperience)
@@ -70,7 +61,7 @@ class QuestDetailsFragment : Fragment() {
         val questDescView = view.findViewById<TextView>(R.id.questDetailsDescription)
 
 
-        val (_, name, level, experience, time, _, description) = quest
+        val (_, name, level, experience, time, _, description) = userQuest.quest
 
         questLevelView.text = "Suggested level: $level"
         questTimeView.text = "Time: $time hr"
@@ -88,16 +79,16 @@ class QuestDetailsFragment : Fragment() {
 
     }
 
-    fun createCharactersList(view :View, quest : Quest, characterSlots : CharacterSlots) {
-        var characters : List<Character>? = chVM.characters.value
-        if(characters == null) {
-            characters  = listOf()
+    fun createCharactersList(view :View, characterSlots : CharacterSlots) {
+        var userCharacters : List<UserCharacter>? = chVM.characters.value
+        if(userCharacters == null) {
+            userCharacters  = listOf()
         }
 
         val questDetailsCharactersRV: RecyclerView = view.findViewById(R.id.questDetailsCharactersRecyclerView)
         questDetailsCharactersRV.layoutManager =  LinearLayoutManager(context);
         val questDetailsCharactersAdapter = QuestDetailsCharactersAdapter(
-            characters,
+            userCharacters,
             characterSlots
         )
         questDetailsCharactersRV.adapter = questDetailsCharactersAdapter

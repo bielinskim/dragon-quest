@@ -73,7 +73,7 @@ class RegisterFragment : Fragment() {
     private fun register(login: String, password: String) {
         val api = RetrofitService
 
-        val user = User(null, login, password)
+        val user = User(null, login, password, null)
 
         api.registerUser(user, {
             if (it?.userId != null) {

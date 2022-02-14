@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
 import com.dragonquest.data.characterImages
 import com.dragonquest.models.Character
+import com.dragonquest.models.UserCharacter
 import com.dragonquest.utils.GetLevelProgress
 import com.dragonquest.utils.getLevel
 
 class QuestDetailsCharactersAdapter(
-    private var dataSet: List<Character> = listOf(),
+    private var dataSet: List<UserCharacter> = listOf(),
     private val characterSlots: CharacterSlots
 ) :
 RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
@@ -36,10 +37,10 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (_, level, minExp, maxExp) = getLevel(dataSet[position].experience)
         val progress = GetLevelProgress(dataSet[position].experience, minExp, maxExp)
-        val imageId = dataSet[position].imageId
+        val imageId = dataSet[position].character.imageId
         val image = holder.charactersImages[imageId]
 
-        holder.characterNameView.text = dataSet[position].name
+        holder.characterNameView.text = dataSet[position].character.name
         holder.characterExperienceView.progress = progress
         if(image != null) {
             holder.characterImageView.setImageResource(image)
@@ -52,7 +53,7 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
 
     override fun getItemCount() = dataSet.size
 
-    fun setData(newList : List<Character>) {
+    fun setData(newList : List<UserCharacter>) {
         dataSet = newList
     }
 

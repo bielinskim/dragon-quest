@@ -1,11 +1,10 @@
 package com.dragonquest.utils
 
-import com.dragonquest.models.Character
-import com.dragonquest.models.Quest
-import com.dragonquest.models.User
+import com.dragonquest.models.*
 import retrofit2.Call;
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface RetrofitApi  {
@@ -21,5 +20,11 @@ interface RetrofitApi  {
 
     @POST("/user/login")
     fun loginUser(@Body user : User) : Call<User>
+
+    @GET("/userCharacter")
+    fun getUserCharacters(@Header("Token") token : String) : Call<List<UserCharacter>>
+
+    @GET("/userQuest")
+    fun getUserQuests(@Header("Token") token : String) : Call<List<UserQuest>>
 
 }

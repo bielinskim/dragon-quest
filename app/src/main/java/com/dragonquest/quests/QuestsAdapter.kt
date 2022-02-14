@@ -9,8 +9,9 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dragonquest.R
 import com.dragonquest.models.Quest
+import com.dragonquest.models.UserQuest
 
-class QuestsAdapter(val navController : NavController, private var dataSet: List<Quest> = listOf()) :
+class QuestsAdapter(val navController : NavController, private var dataSet: List<UserQuest> = listOf()) :
     RecyclerView.Adapter<QuestsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -29,7 +30,7 @@ class QuestsAdapter(val navController : NavController, private var dataSet: List
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (id, name, level, experience, time, _) = dataSet[position]
+        val (id, name, level, experience, time, _) = dataSet[position].quest
 
         holder.questLevelView.text = level.toString()
         holder.questNameView.text = name
@@ -45,7 +46,7 @@ class QuestsAdapter(val navController : NavController, private var dataSet: List
 
     override fun getItemCount() = dataSet.size
 
-    fun setData(newList : List<Quest>) {
+    fun setData(newList : List<UserQuest>) {
         dataSet = newList
     }
 

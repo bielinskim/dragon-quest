@@ -7,9 +7,11 @@ import com.dragonquest.R
 import com.dragonquest.data.characterImages
 import com.dragonquest.models.Quest
 import com.dragonquest.models.Character
+import com.dragonquest.models.UserCharacter
+import com.dragonquest.models.UserQuest
 
 
-class CharacterSlots(fragmentView : View, quest : Quest) {
+class CharacterSlots(fragmentView : View, userQuest : UserQuest) {
 
     private val slotViewIds = arrayOf(R.id.selectedCharacter1, R.id.selectedCharacter2, R.id.selectedCharacter3)
     private val characterSlots = arrayListOf<CharacterSlot>()
@@ -17,7 +19,7 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
     var slots = 0
 
     init {
-        slots = quest.slots
+        slots = userQuest.quest.slots
 
         for (i in 0 until slots) {
             val slotView = fragmentView.findViewById<FrameLayout>(slotViewIds[i])
@@ -29,22 +31,22 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
         }
     }
 
-    fun selectCharacter(character : Character) {
-        val isAlreadySelected = characterSlots.any { it.character?.characterId == character.characterId }
+    fun selectCharacter(userCharacter : UserCharacter) {
+        val isAlreadySelected = characterSlots.any { it.userCharacter?.userCharacterId == userCharacter.userCharacterId }
 
         if (!isAlreadySelected) {
-            var emptyCharacterSlot = characterSlots.firstOrNull { it.character == null }
+            val emptyCharacterSlot = characterSlots.firstOrNull { it.userCharacter == null }
 
             if(emptyCharacterSlot != null) {
-                addCharacterToSlot(emptyCharacterSlot, character)
+                addCharacterToSlot(emptyCharacterSlot, userCharacter)
             }
         }
     }
 
-    fun addCharacterToSlot(characterSlot : CharacterSlot, character : Character) {
-        characterSlot.character = character
+    fun addCharacterToSlot(characterSlot : CharacterSlot, userCharacter : UserCharacter) {
+        characterSlot.userCharacter = userCharacter
         val characterImage = characterSlot.slotView.findViewWithTag<ImageView>("characterImage")
-        val image = charactersImages[character.imageId]
+        val image = charactersImages[userCharacter.character.imageId]
 
         if(image != null) {
             characterImage.setImageResource(image)
@@ -54,7 +56,7 @@ class CharacterSlots(fragmentView : View, quest : Quest) {
 
     fun addListenerToFullSlot(characterSlot: CharacterSlot) {
         characterSlot.slotView.setOnClickListener {
-            characterSlot.character = null
+            characterSlot.userCharacter = null
             val characterImage = characterSlot.slotView.findViewWithTag<ImageView>("characterImage")
             characterImage.setImageResource(R.drawable.placeholder)
         }
