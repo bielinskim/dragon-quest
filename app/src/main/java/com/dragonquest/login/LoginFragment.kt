@@ -82,7 +82,7 @@ class LoginFragment : Fragment() {
     private fun login(login: String, password: String) {
         val api = RetrofitService
 
-        var user = User(null, login, password, null)
+        var user = User(null, login, password, null, null)
 
         api.loginUser(user, {
             val userId = it?.userId
