@@ -25,6 +25,7 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
         val characterNameView: TextView = view.findViewById(R.id.characterName)
         val characterImageView: ImageView = view.findViewById(R.id.characterImage)
         val characterExperienceView: ProgressBar = view.findViewById(R.id.characterExperience)
+        val characterLevelView: TextView = view.findViewById(R.id.characterLevel)
         val charactersImages = characterImages()
     }
 
@@ -42,12 +43,13 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
 
         holder.characterNameView.text = dataSet[position].character.name
         holder.characterExperienceView.progress = progress
+        holder.characterLevelView.text = level.toString()
         if(image != null) {
             holder.characterImageView.setImageResource(image)
         }
 
         holder.thisView.setOnClickListener { it: View ->
-            characterSlots.selectCharacter(dataSet[position]);
+            characterSlots.selectCharacter(dataSet[position])
         }
     }
 

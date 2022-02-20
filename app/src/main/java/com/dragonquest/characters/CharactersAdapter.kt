@@ -21,7 +21,8 @@ class CharactersAdapter(private var dataSet: List<UserCharacter> = listOf()) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val characterNameView: TextView = view.findViewById(R.id.characterName)
-        val characterExperienceView: ProgressBar = view.findViewById(R.id.characterExperience)
+        val characterExperienceBarView: ProgressBar = view.findViewById(R.id.characterExperienceBar)
+        val characterExperienceView: TextView = view.findViewById(R.id.characterExperience)
         val characterLevelView: TextView = view.findViewById(R.id.characterLevel)
         val characterImageView: ImageView = view.findViewById(R.id.characterImage)
         val charactersImages = characterImages()
@@ -40,10 +41,12 @@ class CharactersAdapter(private var dataSet: List<UserCharacter> = listOf()) :
         val image = holder.charactersImages[imageId]
         val (_, level, minExp, maxExp) = getLevel(dataSet[position].experience)
         val progress = GetLevelProgress(experience, minExp, maxExp)
+        val experienceOnLevel = experience - minExp
 
         holder.characterNameView.text = name
         holder.characterLevelView.text = level.toString()
-        holder.characterExperienceView.progress = progress
+        holder.characterExperienceBarView.progress = progress
+        holder.characterExperienceView.text = "$experienceOnLevel / $maxExp"
 
         if(image != null) {
                 holder.characterImageView.setImageResource(image)

@@ -62,14 +62,14 @@ class LoginFragment : Fragment() {
     private fun validate(login: String, password: String): Boolean {
 
         if (login == "") {
-            val message = "Pole login nie może byc puste"
+            val message = "Login field cannot be empty"
             setMessage(message, "ERROR")
 
             return false;
         }
 
         if (password == "") {
-            val message = "Pole hasło nie może byc puste"
+            val message = "Password field cannot be empty"
             setMessage(message, "ERROR")
 
             return false;
@@ -80,6 +80,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(login: String, password: String) {
+        setMessage("Logging...", "SUCCESS")
         val api = RetrofitService
 
         var user = User(null, login, password, null, null)
@@ -87,11 +88,11 @@ class LoginFragment : Fragment() {
         api.loginUser(user, {
             val userId = it?.userId
             if (userId != null) {
-                setMessage("Zalogowano", "SUCCESS")
+                setMessage("Logged in", "SUCCESS")
                 clearInputs()
                 onLoginSuccess(it)
             } else {
-                setMessage("Błąd podczas logowania", "ERROR")
+                setMessage("Error while logging", "ERROR")
             }
         },
             {

@@ -1,6 +1,7 @@
 package com.dragonquest.utils
 
 import com.dragonquest.models.Error
+import com.dragonquest.models.StartQuest
 import com.dragonquest.models.User
 import com.google.gson.Gson
 import retrofit2.Call
@@ -10,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
-    var BASE_URL = "http://192.168.1.105:8000/"
+    var BASE_URL = "http://192.168.1.104:8000/"
 
     val gson = Gson()
 
@@ -25,7 +26,7 @@ object RetrofitService {
         api.registerUser(user).enqueue(
             object : Callback<User> {
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    onError("Błąd podczas tworzenia konta")
+                    onError("Error while account creating")
                 }
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -47,7 +48,7 @@ object RetrofitService {
         api.loginUser(user).enqueue(
             object : Callback<User> {
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    onError("Błąd podczas logowania")
+                    onError("Error while logging")
                 }
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -56,7 +57,28 @@ object RetrofitService {
                         onSuccess(addedUser)
                     }
                     if(response.code() == 400) {
-                        onError("Niepoprawne dane logowania")
+                        onError("Incorrect login data")
+                    }
+
+                }
+            }
+        )
+    }
+
+    fun startQuest(startQuestData : StartQuest, onSuccess: (StartQuest?) -> Unit, onError: (String?) -> Unit) {
+        api.startQuest(UserDataStore.token, startQuestData).enqueue(
+            object : Callback<StartQuest> {
+                override fun onFailure(call: Call<StartQuest>, t: Throwable) {
+                    onError("Error while the quest starting")
+                }
+
+                override fun onResponse(call: Call<StartQuest>, response: Response<StartQuest>) {
+                    if(response.isSuccessful) {
+                        val startedQuest = response.body()
+                        onSuccess(startedQuest)
+                    }
+                    if(response.code() == 400) {
+                        onError("Error while the quest starting")
                     }
 
                 }

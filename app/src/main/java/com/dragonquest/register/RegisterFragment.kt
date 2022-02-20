@@ -53,14 +53,14 @@ class RegisterFragment : Fragment() {
     private fun validate(login: String, password: String): Boolean {
 
         if (login == "") {
-            val message = "Pole login nie może byc puste"
+            val message = "Login field cannot be empty"
             setMessage(message, "ERROR")
 
             return false;
         }
 
         if (password == "") {
-            val message = "Pole hasło nie może byc puste"
+            val message = "Password field cannot be empty"
             setMessage(message, "ERROR")
 
             return false;
@@ -77,11 +77,11 @@ class RegisterFragment : Fragment() {
 
         api.registerUser(user, {
             if (it?.userId != null) {
-                val message = "Konto zostało utworzone"
+                val message = "Account has been created"
                 setMessage(message, "SUCCESS")
                 clearInputs()
             } else {
-                val message = "Błąd podczas tworzenia konta"
+                val message = "Error while account creating"
                 setMessage(message, "ERROR")
             }
         },

@@ -27,4 +27,7 @@ interface RetrofitApi  {
     @GET("/userQuest")
     fun getUserQuests(@Header("Token") token : String) : Call<List<UserQuest>>
 
+    @POST("/userQuest/startQuest")
+    fun startQuest(@Header("Token") token : String, @Body startQuest : StartQuest) : Call<StartQuest>
+
 }

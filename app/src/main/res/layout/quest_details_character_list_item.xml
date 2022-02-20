@@ -35,8 +35,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="4dp"
         android:textColor="@color/primary"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/characterExperience"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
