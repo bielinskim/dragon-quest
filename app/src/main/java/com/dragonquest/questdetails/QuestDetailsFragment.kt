@@ -22,9 +22,14 @@ import com.dragonquest.models.StartQuest
 import com.dragonquest.models.UserCharacter
 import com.dragonquest.models.UserQuest
 import com.dragonquest.utils.RetrofitService
+import com.dragonquest.utils.UserQuestsUpdater
 import com.dragonquest.viewmodels.QuestsViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class QuestDetailsFragment : Fragment() {
@@ -86,6 +91,8 @@ class QuestDetailsFragment : Fragment() {
         startQuestButton.setOnClickListener {
             val characterSlots = characterSlots.characterSlots
             startQuest(characterSlots, userQuestId)
+            //val userQuestsUpdater = UserQuestsUpdater(chVM, questVM)
+            //userQuestsUpdater.test()
         }
 
     }
@@ -112,7 +119,6 @@ class QuestDetailsFragment : Fragment() {
 
     fun startQuest(characterSlots : ArrayList<CharacterSlot>, userQuestId : Int) {
         val isAnySelected = characterSlots.any { it.userCharacter != null }
-
 
         if(isAnySelected) {
             val api = RetrofitService

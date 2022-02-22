@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
-    var BASE_URL = "http://192.168.1.104:8000/"
+    var BASE_URL = "http://192.168.1.105:8000/"
 
     val gson = Gson()
 
