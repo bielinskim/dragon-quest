@@ -62,14 +62,14 @@ class LoginFragment : Fragment() {
     private fun validate(login: String, password: String): Boolean {
 
         if (login == "") {
-            val message = "Login field cannot be empty"
+            val message = "Login field can't be empty"
             setMessage(message, "ERROR")
 
             return false;
         }
 
         if (password == "") {
-            val message = "Password field cannot be empty"
+            val message = "Password field can't be empty"
             setMessage(message, "ERROR")
 
             return false;
