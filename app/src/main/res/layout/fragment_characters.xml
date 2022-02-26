@@ -9,12 +9,13 @@
     tools:context=".characters.CharactersFragment">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/charactersRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="90">
-        </androidx.recyclerview.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/charactersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" />
 
         <View
             android:id="@+id/gameTabLayoutSeparator"

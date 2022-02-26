@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">DragonQuest</string>
     <string name="image_of_character">Image of character</string>
-    <string name="login_title">Logowanie</string>
-    <string name="login_button">Zaloguj się</string>
+    <string name="login_title">Log in</string>
+    <string name="login_button">Log in</string>
     <string name="login_hint">Login</string>
-    <string name="password_hint">Hasło</string>
-    <string name="login_tab">Logowanie</string>
-    <string name="register_tab">Rejestracja</string>
-    <string name="register_title">Rejestracja</string>
-    <string name="register_button">Zarejestruj się</string>
+    <string name="password_hint">Password</string>
+    <string name="login_tab">Log in</string>
+    <string name="register_tab">Sign up</string>
+    <string name="register_title">Sign up</string>
+    <string name="register_button">Sign up</string>
 </resources>

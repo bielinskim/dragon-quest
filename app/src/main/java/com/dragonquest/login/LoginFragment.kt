@@ -32,7 +32,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
         navController = Navigation.findNavController(requireActivity(), R.id.navigationHost)
+        navController.navigate(R.id.action_loginFragment_to_charactersFragment)
 
         val registerTabTextView: TextView = view.findViewById(R.id.registerTabTextView)
         val loginButton: Button = view.findViewById(R.id.loginButton)
