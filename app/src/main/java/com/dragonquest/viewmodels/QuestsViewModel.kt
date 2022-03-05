@@ -7,6 +7,7 @@ import com.dragonquest.models.Quest
 import com.dragonquest.models.UserQuest
 import com.dragonquest.utils.RetrofitService
 import com.dragonquest.utils.UserDataStore
+import com.dragonquest.utils.UserQuestsUpdater
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -25,6 +26,7 @@ class QuestsViewModel : ViewModel() {
                 val questsResponse = response.body()
                 if(questsResponse != null) {
                    quests.postValue(questsResponse)
+                    UserQuestsUpdater.addQuestsToObserve(questsResponse)
                 }
 
             }

@@ -1,7 +1,5 @@
 package com.dragonquest.models
 
-import java.time.LocalDateTime
-
 data class UserQuest(
     val userQuestId: Int = 0,
     val status : String = "",

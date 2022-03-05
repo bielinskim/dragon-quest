@@ -36,20 +36,35 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (_, level, minExp, maxExp) = getLevel(dataSet[position].experience)
-        val progress = GetLevelProgress(dataSet[position].experience, minExp, maxExp)
-        val imageId = dataSet[position].character.imageId
-        val image = holder.charactersImages[imageId]
+        val (_, experience, character, usersQuests) = dataSet[position]
 
-        holder.characterNameView.text = dataSet[position].character.name
-        holder.characterExperienceView.progress = progress
-        holder.characterLevelView.text = level.toString()
-        if(image != null) {
-            holder.characterImageView.setImageResource(image)
+        var isBusy = false
+
+        if (usersQuests != null) {
+            for (userQuest in usersQuests) {
+                if(userQuest.status == "PENDING") {
+                    isBusy = true
+                    break
+                }
+            }
         }
 
-        holder.thisView.setOnClickListener { it: View ->
-            characterSlots.selectCharacter(dataSet[position])
+        if(!isBusy) {
+            val (_, level, minExp, maxExp) = getLevel(experience)
+            val progress = GetLevelProgress(experience, minExp, maxExp)
+            val imageId = character.imageId
+            val image = holder.charactersImages[imageId]
+
+            holder.characterNameView.text = character.name
+            holder.characterExperienceView.progress = progress
+            holder.characterLevelView.text = level.toString()
+            if(image != null) {
+                holder.characterImageView.setImageResource(image)
+            }
+
+            holder.thisView.setOnClickListener { it: View ->
+                characterSlots.selectCharacter(dataSet[position])
+            }
         }
     }
 

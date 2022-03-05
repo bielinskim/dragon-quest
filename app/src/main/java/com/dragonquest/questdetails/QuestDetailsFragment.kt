@@ -91,8 +91,6 @@ class QuestDetailsFragment : Fragment() {
         startQuestButton.setOnClickListener {
             val characterSlots = characterSlots.characterSlots
             startQuest(characterSlots, userQuestId)
-            //val userQuestsUpdater = UserQuestsUpdater(chVM, questVM)
-            //userQuestsUpdater.test()
         }
 
     }

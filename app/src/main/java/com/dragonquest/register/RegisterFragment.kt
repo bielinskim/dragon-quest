@@ -59,8 +59,22 @@ class RegisterFragment : Fragment() {
             return false;
         }
 
+        if (login.length > 12) {
+            val message = "Login can't be longer than 12 characters"
+            setMessage(message, "ERROR")
+
+            return false;
+        }
+
         if (password == "") {
             val message = "Password field can't be empty"
+            setMessage(message, "ERROR")
+
+            return false;
+        }
+
+        if (password.length > 16) {
+            val message = "Password can't be longer than 16 characters"
             setMessage(message, "ERROR")
 
             return false;
