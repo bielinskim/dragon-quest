@@ -38,18 +38,18 @@ RecyclerView.Adapter<QuestDetailsCharactersAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (_, experience, character, usersQuests) = dataSet[position]
 
-        var isBusy = false
+        var isCharacterAvailable = true
 
         if (usersQuests != null) {
             for (userQuest in usersQuests) {
                 if(userQuest.status == "PENDING") {
-                    isBusy = true
+                    isCharacterAvailable = false
                     break
                 }
             }
         }
 
-        if(!isBusy) {
+        if(isCharacterAvailable) {
             val (_, level, minExp, maxExp) = getLevel(experience)
             val progress = GetLevelProgress(experience, minExp, maxExp)
             val imageId = character.imageId

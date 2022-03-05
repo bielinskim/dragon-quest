@@ -153,8 +153,10 @@ class LoginFragment : Fragment() {
 
         if(userId != null) {
             UserQuestsUpdater.startCheckingQuests(chVM, questVM)
-            chVM.initializeData()
+            // quest must be first due to finish and change status
+            // TODO implement better solution
             questVM.initializeData()
+            chVM.initializeData()
             navController.navigate(R.id.action_loginFragment_to_charactersFragment)
         }
     }

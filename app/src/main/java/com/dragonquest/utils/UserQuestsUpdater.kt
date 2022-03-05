@@ -37,8 +37,10 @@ object UserQuestsUpdater {
                 val now = LocalDateTime.now()
 
                 if(now.isAfter(parsedTime)) {
-                    chVM.initializeData()
+                    // quest must be first due to finish and change status
+                    // TODO implement better solution
                     questVM.initializeData()
+                    chVM.initializeData()
                 }
             }
         }
